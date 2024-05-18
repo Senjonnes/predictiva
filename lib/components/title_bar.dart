@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/utils/helper_widgets.dart';
 
 class TitleBar extends StatefulWidget {
   final Size screenSize;
@@ -17,10 +18,10 @@ class _TitleBarState extends State<TitleBar> {
           left: widget.screenSize.width / 10,
           right: widget.screenSize.width / 10,
         ),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Hi Robin,',
               style: TextStyle(
                 fontSize: 20,
@@ -29,8 +30,8 @@ class _TitleBarState extends State<TitleBar> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 5),
-            Text(
+            addVerticalSpace(5),
+            const Text(
               'Here is an overview of your account activities.',
               style: TextStyle(
                 fontSize: 12,

@@ -76,9 +76,7 @@ class AppTableHeader extends StatelessWidget {
                                 color: Color(0xFFE1E1E5),
                                 fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          addHorizontalSpace(10),
                           Image.asset(
                             AppImages.filterList,
                             height: 18,

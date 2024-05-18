@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predictiva/utils/app_images.dart';
+import 'package:predictiva/utils/helper_widgets.dart';
 
 class AppTablePagination extends StatelessWidget {
   const AppTablePagination({super.key, required this.screenSize});
@@ -34,9 +35,7 @@ class AppTablePagination extends StatelessWidget {
                       height: 12,
                       width: 12,
                     ))),
-            const SizedBox(
-              width: 10,
-            ),
+            addHorizontalSpace(10),
             InkWell(
                 onTap: () {},
                 child: Container(
