@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/public/widgets/responsive_widget.dart';
 import 'package:predictiva/utils/app_images.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
-
-import 'widgets.dart';
 
 class HistoryCard extends StatefulWidget {
   final Size screenSize;
