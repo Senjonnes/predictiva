@@ -39,7 +39,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
                 decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
-                      color: const Color(0xFF3E3F48),
+                      color: AppColors.sectionBorder,
                     ),
                     borderRadius: BorderRadius.circular(8)),
                 child: Image.asset(
@@ -52,7 +52,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
                 decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
-                      color: const Color(0xFF3E3F48),
+                      color: AppColors.sectionBorder,
                     ),
                     borderRadius: BorderRadius.circular(5)),
                 child: Row(
@@ -62,8 +62,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
                     const Text(
                       "Filter",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
-                          fontWeight: FontWeight.w600),
+                          color: AppColors.light, fontWeight: FontWeight.w600),
                     ),
                     addHorizontalSpace(10),
                     Image.asset(
@@ -80,8 +79,8 @@ class _AppTableFilterState extends State<AppTableFilter> {
     double top = offset.dy;
     await showMenu(
       context: context,
-      color: const Color(0xFF19191B),
-      surfaceTintColor: const Color(0xFF19191B),
+      color: AppColors.primaryColor,
+      surfaceTintColor: AppColors.primaryColor,
       position: RelativeRect.fromDirectional(
           textDirection: Directionality.of(context),
           start: left,
@@ -103,10 +102,10 @@ class _AppTableFilterState extends State<AppTableFilter> {
                       hintText: "Symbol",
                       selectedValue: selectedSymbol,
                       textInputType: TextInputType.text,
-                      fillColor: const Color(0xFF19191B),
-                      enabledBorderColor: const Color(0xFF3E3F48),
-                      hintTextStyle: const TextStyle(
-                          color: Color(0xFF9E9EA5), fontSize: 12),
+                      fillColor: AppColors.primaryColor,
+                      enabledBorderColor: AppColors.sectionBorder,
+                      hintTextStyle:
+                          const TextStyle(color: AppColors.hint, fontSize: 12),
                       isDense: true,
                       items: const ['Symbol', 'Test', 'Items'],
                       borderRadius: 5,
@@ -125,10 +124,10 @@ class _AppTableFilterState extends State<AppTableFilter> {
                       controller: priceController,
                       hintText: "Price",
                       textInputType: TextInputType.phone,
-                      fillColor: const Color(0xFF19191B),
-                      enabledBorderColor: const Color(0xFF3E3F48),
-                      hintTextStyle: const TextStyle(
-                          color: Color(0xFF9E9EA5), fontSize: 12),
+                      fillColor: AppColors.primaryColor,
+                      enabledBorderColor: AppColors.sectionBorder,
+                      hintTextStyle:
+                          const TextStyle(color: AppColors.hint, fontSize: 12),
                       prefixPadding: 0,
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$'))
@@ -166,11 +165,11 @@ class _AppTableFilterState extends State<AppTableFilter> {
                               hintText: "Start date",
                               enabled: false,
                               textInputType: TextInputType.text,
-                              fillColor: const Color(0xFF19191B),
-                              enabledBorderColor: const Color(0xFF3E3F48),
-                              disabledBorderColor: const Color(0xFF3E3F48),
+                              fillColor: AppColors.primaryColor,
+                              enabledBorderColor: AppColors.sectionBorder,
+                              disabledBorderColor: AppColors.sectionBorder,
                               hintTextStyle: const TextStyle(
-                                  color: Color(0xFF9E9EA5), fontSize: 12),
+                                  color: AppColors.hint, fontSize: 12),
                               suffixIcon: Transform.scale(
                                   scale: 0.4,
                                   child: Image.asset(AppImages.calendar)),
@@ -192,11 +191,11 @@ class _AppTableFilterState extends State<AppTableFilter> {
                               hintText: "End date",
                               enabled: false,
                               textInputType: TextInputType.text,
-                              fillColor: const Color(0xFF19191B),
-                              enabledBorderColor: const Color(0xFF3E3F48),
-                              disabledBorderColor: const Color(0xFF3E3F48),
+                              fillColor: AppColors.primaryColor,
+                              enabledBorderColor: AppColors.sectionBorder,
+                              disabledBorderColor: AppColors.sectionBorder,
                               hintTextStyle: const TextStyle(
-                                  color: Color(0xFF9E9EA5), fontSize: 12),
+                                  color: AppColors.hint, fontSize: 12),
                               suffixIcon: Transform.scale(
                                   scale: 0.4,
                                   child: Image.asset(AppImages.calendar)),

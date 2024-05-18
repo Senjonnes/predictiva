@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predictiva/public/widgets/responsive_widget.dart';
+import 'package:predictiva/utils/app_colors.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 import 'widgets.dart';
 
@@ -29,8 +30,8 @@ class _AppTableState extends State<AppTable> {
           child: Container(
               padding: EdgeInsets.all(widget.screenSize.width / 50),
               decoration: BoxDecoration(
-                  color: const Color(0xFF161619),
-                  border: Border.all(color: const Color(0xFF3E3F48)),
+                  color: AppColors.tableBg,
+                  border: Border.all(color: AppColors.sectionBorder),
                   borderRadius: BorderRadius.circular(8)),
               child: Column(
                 children: [

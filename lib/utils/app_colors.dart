@@ -16,4 +16,13 @@ class AppColors {
   static const Color lightGreyBorder = Color(0xFFF0F0F0);
   static const Color lightGreyBg = Color(0xFFF4F4F6);
   static const Color inputLabelColor = Color(0xFF656464);
+  static const Color danger = Color(0xFFE40C0C);
+  static const Color success = Color(0xFF00AC3A);
+  static const Color sellBg = Color(0xFF212126);
+  static const Color light = Color(0xFFE1E1E5);
+  static const Color sectionBorder = Color(0xFF3E3F48);
+  static const Color tableBg = Color(0xFF161619);
+  static const Color extraLight = Color(0xFFF4F4F5);
+  static const Color hint = Color(0xFF9E9EA5);
+  static const Color faintLight = Color(0xFFB1B1B8);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/utils/app_colors.dart';
 import 'package:predictiva/utils/app_images.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 
@@ -15,7 +16,7 @@ class AppTablePagination extends StatelessWidget {
         const Text(
           "1 - 5 of 30",
           style: TextStyle(
-            color: Color(0xFFE1E1E5),
+            color: AppColors.light,
           ),
         ),
         Row(
@@ -27,7 +28,7 @@ class AppTablePagination extends StatelessWidget {
                     decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: const Color(0xFF3E3F48),
+                          color: AppColors.sectionBorder,
                         ),
                         borderRadius: BorderRadius.circular(2)),
                     child: Image.asset(
@@ -43,7 +44,7 @@ class AppTablePagination extends StatelessWidget {
                     decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
-                          color: const Color(0xFF3E3F48),
+                          color: AppColors.sectionBorder,
                         ),
                         borderRadius: BorderRadius.circular(2)),
                     child: Image.asset(

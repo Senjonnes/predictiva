@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/utils/app_colors.dart';
 
 Widget loaderWidget(bool loading, Widget widget) {
   return loading
@@ -6,13 +7,13 @@ Widget loaderWidget(bool loading, Widget widget) {
           height: 20,
           width: 20,
           child: CircularProgressIndicator(
-              strokeWidth: 2, color: Color(0xFF00AC3A)))
+              strokeWidth: 2, color: AppColors.success))
       : widget;
 }
 
 Widget errorWidget(String message) {
   return Text(
     message,
-    style: const TextStyle(color: Color(0xFFE40C0C), fontSize: 10),
+    style: const TextStyle(color: AppColors.danger, fontSize: 10),
   );
 }

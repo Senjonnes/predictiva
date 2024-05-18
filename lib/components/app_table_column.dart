@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/utils/app_colors.dart';
 
 class AppTableColumn extends StatelessWidget {
   const AppTableColumn({super.key, required this.screenSize});
@@ -20,7 +21,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Symbol",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),
@@ -29,7 +30,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Price",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),
@@ -38,7 +39,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Type",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),
@@ -47,7 +48,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Action",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),
@@ -56,7 +57,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Quantity",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),
@@ -65,7 +66,7 @@ class AppTableColumn extends StatelessWidget {
                     child: Text(
                       "Date",
                       style: TextStyle(
-                          color: Color(0xFFE1E1E5),
+                          color: AppColors.light,
                           fontSize: 12,
                           fontWeight: FontWeight.w600),
                     )),

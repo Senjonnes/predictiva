@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:predictiva/pages/home/model/portfolio_model.dart';
 import 'package:predictiva/public/widgets/responsive_widget.dart';
 import 'package:predictiva/public/widgets/ui_widgets.dart';
+import 'package:predictiva/utils/app_colors.dart';
 import 'package:predictiva/utils/app_images.dart';
 import 'package:predictiva/utils/global_function.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
@@ -43,8 +44,8 @@ class HistoryCard extends StatelessWidget {
                           bottom: screenSize.height / 50,
                         ),
                         decoration: BoxDecoration(
-                            color: const Color(0xFF161619),
-                            border: Border.all(color: const Color(0xFF3E3F48)),
+                            color: AppColors.tableBg,
+                            border: Border.all(color: AppColors.sectionBorder),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8))),
@@ -54,7 +55,8 @@ class HistoryCard extends StatelessWidget {
                               decoration: const BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
-                                          width: 1, color: Color(0xFF3E3F48)))),
+                                          width: 1,
+                                          color: AppColors.sectionBorder))),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +64,7 @@ class HistoryCard extends StatelessWidget {
                                   const Text(
                                     "Balance",
                                     style: TextStyle(
-                                        color: Color(0xFFE1E1E5), fontSize: 10),
+                                        color: AppColors.light, fontSize: 10),
                                   ),
                                   addVerticalSpace(5),
                                   loaderWidget(
@@ -76,7 +78,7 @@ class HistoryCard extends StatelessWidget {
                                                       .balance!)
                                                   : '',
                                               style: const TextStyle(
-                                                  color: Color(0xFFE1E1E5),
+                                                  color: AppColors.light,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600),
                                             )
@@ -90,7 +92,8 @@ class HistoryCard extends StatelessWidget {
                               decoration: const BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
-                                          width: 1, color: Color(0xFF3E3F48)))),
+                                          width: 1,
+                                          color: AppColors.sectionBorder))),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +101,7 @@ class HistoryCard extends StatelessWidget {
                                   const Text(
                                     "Profits",
                                     style: TextStyle(
-                                        color: Color(0xFFE1E1E5), fontSize: 10),
+                                        color: AppColors.light, fontSize: 10),
                                   ),
                                   addVerticalSpace(10),
                                   loaderWidget(
@@ -115,7 +118,7 @@ class HistoryCard extends StatelessWidget {
                                                               .profit!)
                                                       : '',
                                                   style: const TextStyle(
-                                                      color: Color(0xFFE1E1E5),
+                                                      color: AppColors.light,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -137,10 +140,9 @@ class HistoryCard extends StatelessWidget {
                                                                           .portfolio!
                                                                           .profit_percentage! <
                                                                       10
-                                                              ? const Color(
-                                                                  0xFFE40C0C)
-                                                              : const Color(
-                                                                  0xFF00AC3A)),
+                                                              ? AppColors.danger
+                                                              : AppColors
+                                                                  .success),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               100)),
@@ -171,10 +173,10 @@ class HistoryCard extends StatelessWidget {
                                                                             .portfolio!
                                                                             .profit_percentage! <
                                                                         10
-                                                                ? const Color(
-                                                                    0xFFE40C0C)
-                                                                : const Color(
-                                                                    0xFF00AC3A),
+                                                                ? AppColors
+                                                                    .danger
+                                                                : AppColors
+                                                                    .success,
                                                             fontSize: 10),
                                                       )
                                                     ],
@@ -196,7 +198,7 @@ class HistoryCard extends StatelessWidget {
                                   const Text(
                                     "Assets",
                                     style: TextStyle(
-                                        color: Color(0xFFE1E1E5), fontSize: 10),
+                                        color: AppColors.light, fontSize: 10),
                                   ),
                                   addVerticalSpace(10),
                                   loaderWidget(
@@ -207,7 +209,7 @@ class HistoryCard extends StatelessWidget {
                                                       .toString() ??
                                                   '',
                                               style: const TextStyle(
-                                                  color: Color(0xFFE1E1E5),
+                                                  color: AppColors.light,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600),
                                             )
@@ -228,8 +230,8 @@ class HistoryCard extends StatelessWidget {
                           bottom: screenSize.height / 30,
                         ),
                         decoration: BoxDecoration(
-                            color: const Color(0xFF161619),
-                            border: Border.all(color: const Color(0xFF3E3F48)),
+                            color: AppColors.tableBg,
+                            border: Border.all(color: AppColors.sectionBorder),
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8))),
@@ -248,7 +250,7 @@ class HistoryCard extends StatelessWidget {
                                       border: Border(
                                           right: BorderSide(
                                               width: 1,
-                                              color: Color(0xFF3E3F48)))),
+                                              color: AppColors.sectionBorder))),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -257,7 +259,7 @@ class HistoryCard extends StatelessWidget {
                                       const Text(
                                         "Balance",
                                         style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
+                                            color: AppColors.light,
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
@@ -273,7 +275,7 @@ class HistoryCard extends StatelessWidget {
                                                               .balance!)
                                                       : '',
                                                   style: const TextStyle(
-                                                      color: Color(0xFFE1E1E5),
+                                                      color: AppColors.light,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -290,7 +292,7 @@ class HistoryCard extends StatelessWidget {
                                       border: Border(
                                           right: BorderSide(
                                               width: 1,
-                                              color: Color(0xFF3E3F48)))),
+                                              color: AppColors.sectionBorder))),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -299,7 +301,7 @@ class HistoryCard extends StatelessWidget {
                                       const Text(
                                         "Profits",
                                         style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
+                                            color: AppColors.light,
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
@@ -318,7 +320,7 @@ class HistoryCard extends StatelessWidget {
                                                           : '',
                                                       style: const TextStyle(
                                                           color:
-                                                              Color(0xFFE1E1E5),
+                                                              AppColors.light,
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w600),
@@ -340,10 +342,10 @@ class HistoryCard extends StatelessWidget {
                                                                               .portfolio!
                                                                               .profit_percentage! <
                                                                           10
-                                                                  ? const Color(
-                                                                      0xFFE40C0C)
-                                                                  : const Color(
-                                                                      0xFF00AC3A)),
+                                                                  ? AppColors
+                                                                      .danger
+                                                                  : AppColors
+                                                                      .success),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -372,10 +374,10 @@ class HistoryCard extends StatelessWidget {
                                                                             null &&
                                                                         portfolio.data!.portfolio!.profit_percentage! <
                                                                             10
-                                                                    ? const Color(
-                                                                        0xFFE40C0C)
-                                                                    : const Color(
-                                                                        0xFF00AC3A),
+                                                                    ? AppColors
+                                                                        .danger
+                                                                    : AppColors
+                                                                        .success,
                                                                 fontSize: 10),
                                                           )
                                                         ],
@@ -399,7 +401,7 @@ class HistoryCard extends StatelessWidget {
                                       const Text(
                                         "Assets",
                                         style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
+                                            color: AppColors.light,
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
@@ -412,7 +414,7 @@ class HistoryCard extends StatelessWidget {
                                                           .toString() ??
                                                       '',
                                                   style: const TextStyle(
-                                                      color: Color(0xFFE1E1E5),
+                                                      color: AppColors.light,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -438,9 +440,9 @@ class HistoryCard extends StatelessWidget {
         ),
         decoration: const BoxDecoration(
             border: Border(
-                bottom: BorderSide(color: Color(0xFF3E3F48)),
-                right: BorderSide(color: Color(0xFF3E3F48)),
-                left: BorderSide(color: Color(0xFF3E3F48))),
+                bottom: BorderSide(color: AppColors.sectionBorder),
+                right: BorderSide(color: AppColors.sectionBorder),
+                left: BorderSide(color: AppColors.sectionBorder)),
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(8),
                 bottomRight: Radius.circular(8))),
@@ -454,7 +456,7 @@ class HistoryCard extends StatelessWidget {
             addHorizontalSpace(10),
             const Text(
               "This subscription expires in a month",
-              style: TextStyle(color: Color(0xFFF4F4F5), fontSize: 12),
+              style: TextStyle(color: AppColors.extraLight, fontSize: 12),
             )
           ],
         ));

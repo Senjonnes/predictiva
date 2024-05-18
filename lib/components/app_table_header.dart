@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predictiva/components/app_table_filter.dart';
+import 'package:predictiva/utils/app_colors.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 
 class AppTableHeader extends StatelessWidget {
@@ -18,7 +19,7 @@ class AppTableHeader extends StatelessWidget {
                   const Text(
                     "Open trades",
                     style: TextStyle(
-                        color: Color(0xFFE1E1E5),
+                        color: AppColors.light,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
@@ -28,7 +29,7 @@ class AppTableHeader extends StatelessWidget {
               addVerticalSpace(10),
               const Divider(
                 thickness: 0.5,
-                color: Color(0xFF3E3F48),
+                color: AppColors.sectionBorder,
               )
             ],
           )
@@ -38,7 +39,7 @@ class AppTableHeader extends StatelessWidget {
               const Text(
                 "Open trades",
                 style: TextStyle(
-                    color: Color(0xFFE1E1E5),
+                    color: AppColors.light,
                     fontSize: 16,
                     fontWeight: FontWeight.w600),
               ),

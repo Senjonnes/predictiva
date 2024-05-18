@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/utils/app_colors.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 
 class AppTableRow extends StatelessWidget {
@@ -13,7 +14,7 @@ class AppTableRow extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15, bottom: 15),
             decoration: const BoxDecoration(
               border: Border(
-                  bottom: BorderSide(width: 1, color: Color(0xFF3E3F48))),
+                  bottom: BorderSide(width: 1, color: AppColors.sectionBorder)),
             ),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -23,8 +24,7 @@ class AppTableRow extends StatelessWidget {
                     children: [
                       const Text(
                         "MINAUSDT",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 14),
+                        style: TextStyle(color: AppColors.light, fontSize: 14),
                       ),
                       addVerticalSpace(8),
                       Row(
@@ -33,15 +33,14 @@ class AppTableRow extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 4, horizontal: 8),
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color(0xFFE40C0C)),
+                                  border: Border.all(color: AppColors.danger),
                                   borderRadius: BorderRadius.circular(100),
-                                  color: const Color(0xFF212126)),
+                                  color: AppColors.sellBg),
                               child: const Center(
                                   child: Text(
                                 "Sell",
                                 style: TextStyle(
-                                    color: Color(0xFFE40C0C), fontSize: 12),
+                                    color: AppColors.danger, fontSize: 12),
                               )))
                         ],
                       )
@@ -52,14 +51,13 @@ class AppTableRow extends StatelessWidget {
                     children: [
                       const Text(
                         "1.5636",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       ),
                       addVerticalSpace(8),
                       const Text(
                         "19 Dec, 2023",
-                        style:
-                            TextStyle(color: Color(0xFFB1B1B8), fontSize: 12),
+                        style: TextStyle(
+                            color: AppColors.faintLight, fontSize: 12),
                       )
                     ],
                   )
@@ -69,7 +67,7 @@ class AppTableRow extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.only(top: 20, bottom: 15),
             decoration: BoxDecoration(
-                border: Border.all(width: 1, color: const Color(0xFF3E3F48)),
+                border: Border.all(width: 1, color: AppColors.sectionBorder),
                 borderRadius: BorderRadius.circular(8)),
             child: GridView.count(
                 shrinkWrap: true,
@@ -81,22 +79,19 @@ class AppTableRow extends StatelessWidget {
                       padding: EdgeInsets.only(left: 25),
                       child: Text(
                         "MINAUSDT",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       )),
                   const Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: Text(
                         "1.5636",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       )),
                   const Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: Text(
                         "LMT",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       )),
                   Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -106,15 +101,14 @@ class AppTableRow extends StatelessWidget {
                               height: 36,
                               width: 48,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color(0xFFE40C0C)),
+                                  border: Border.all(color: AppColors.danger),
                                   borderRadius: BorderRadius.circular(100),
-                                  color: const Color(0xFF212126)),
+                                  color: AppColors.sellBg),
                               child: const Center(
                                   child: Text(
                                 "Sell",
                                 style: TextStyle(
-                                    color: Color(0xFFE40C0C), fontSize: 12),
+                                    color: AppColors.danger, fontSize: 12),
                               )))
                         ],
                       )),
@@ -122,15 +116,13 @@ class AppTableRow extends StatelessWidget {
                       padding: EdgeInsets.only(left: 25),
                       child: Text(
                         "0",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       )),
                   const Padding(
                       padding: EdgeInsets.only(left: 25),
                       child: Text(
                         "19 Dec, 2023",
-                        style:
-                            TextStyle(color: Color(0xFFE1E1E5), fontSize: 12),
+                        style: TextStyle(color: AppColors.light, fontSize: 12),
                       )),
                 ]),
           );
