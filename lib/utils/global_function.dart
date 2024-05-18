@@ -28,3 +28,17 @@ Future<DateTime?> showRangeDatePicker(BuildContext context,
     },
   );
 }
+
+String currencyFormatter(double amount) {
+  int integerPart = amount.truncate();
+  int decimalPart = ((amount - integerPart) * 100).round();
+
+  String integerPartFormatted = integerPart.toString().replaceAllMapped(
+        RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+        (Match match) => '${match[1]},',
+      );
+
+  String decimalPartFormatted = decimalPart.toString().padLeft(2, '0');
+
+  return '\$$integerPartFormatted.$decimalPartFormatted';
+}

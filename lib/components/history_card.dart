@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/pages/home/model/portfolio_model.dart';
 import 'package:predictiva/public/widgets/responsive_widget.dart';
+import 'package:predictiva/public/widgets/ui_widgets.dart';
 import 'package:predictiva/utils/app_images.dart';
+import 'package:predictiva/utils/global_function.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 
-class HistoryCard extends StatefulWidget {
+class HistoryCard extends StatelessWidget {
   final Size screenSize;
-  const HistoryCard({super.key, required this.screenSize});
+  final PortfolioModel portfolio;
+  final bool loading;
+  final String errorMessage;
+  const HistoryCard(
+      {super.key,
+      required this.screenSize,
+      required this.portfolio,
+      required this.loading,
+      required this.errorMessage});
 
-  @override
-  State<HistoryCard> createState() => _HistoryCardState();
-}
-
-class _HistoryCardState extends State<HistoryCard> {
   @override
   Widget build(BuildContext context) {
     return Center(
       heightFactor: 1,
       child: Padding(
           padding: EdgeInsets.only(
-            top: widget.screenSize.height * 0.03,
+            top: screenSize.height * 0.03,
             left: ResponsiveWidget.isSmallScreen(context)
-                ? widget.screenSize.width / 12
-                : widget.screenSize.width / 10,
+                ? screenSize.width / 12
+                : screenSize.width / 10,
             right: ResponsiveWidget.isSmallScreen(context)
-                ? widget.screenSize.width / 12
-                : widget.screenSize.width / 10,
+                ? screenSize.width / 12
+                : screenSize.width / 10,
           ),
-          child: widget.screenSize.width < 800
+          child: screenSize.width < 800
               ? Column(
                   children: [
                     Container(
                         padding: EdgeInsets.only(
-                          left: widget.screenSize.width / 30,
-                          right: widget.screenSize.width / 30,
-                          top: widget.screenSize.height / 50,
-                          bottom: widget.screenSize.height / 50,
+                          left: screenSize.width / 30,
+                          right: screenSize.width / 30,
+                          top: screenSize.height / 50,
+                          bottom: screenSize.height / 50,
                         ),
                         decoration: BoxDecoration(
                             color: const Color(0xFF161619),
@@ -59,13 +65,22 @@ class _HistoryCardState extends State<HistoryCard> {
                                         color: Color(0xFFE1E1E5), fontSize: 10),
                                   ),
                                   addVerticalSpace(5),
-                                  const Text(
-                                    "\$616.81",
-                                    style: TextStyle(
-                                        color: Color(0xFFE1E1E5),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                                  loaderWidget(
+                                      loading,
+                                      errorMessage.isEmpty
+                                          ? Text(
+                                              portfolio.data != null
+                                                  ? currencyFormatter(portfolio
+                                                      .data!
+                                                      .portfolio!
+                                                      .balance!)
+                                                  : '',
+                                              style: const TextStyle(
+                                                  color: Color(0xFFE1E1E5),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : errorWidget(errorMessage)),
                                   addVerticalSpace(10),
                                 ],
                               )),
@@ -86,45 +101,88 @@ class _HistoryCardState extends State<HistoryCard> {
                                         color: Color(0xFFE1E1E5), fontSize: 10),
                                   ),
                                   addVerticalSpace(10),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        "\$86.03",
-                                        style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      addHorizontalSpace(5),
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                            top: 1,
-                                            bottom: 1,
-                                            left: 2,
-                                            right: 4),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: const Color(0xFF00AC3A)),
-                                            borderRadius:
-                                                BorderRadius.circular(100)),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                                height: 10,
-                                                width: 10,
-                                                AppImages.arrowUpRight),
-                                            addHorizontalSpace(5),
-                                            const Text(
-                                              "31%",
-                                              style: TextStyle(
-                                                  color: Color(0xFF00AC3A),
-                                                  fontSize: 10),
+                                  loaderWidget(
+                                      loading,
+                                      errorMessage.isEmpty
+                                          ? Row(
+                                              children: [
+                                                Text(
+                                                  portfolio.data != null
+                                                      ? currencyFormatter(
+                                                          portfolio
+                                                              .data!
+                                                              .portfolio!
+                                                              .profit!)
+                                                      : '',
+                                                  style: const TextStyle(
+                                                      color: Color(0xFFE1E1E5),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                addHorizontalSpace(5),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 1,
+                                                          bottom: 1,
+                                                          left: 2,
+                                                          right: 4),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: portfolio.data !=
+                                                                      null &&
+                                                                  portfolio
+                                                                          .data!
+                                                                          .portfolio!
+                                                                          .profit_percentage! <
+                                                                      10
+                                                              ? const Color(
+                                                                  0xFFE40C0C)
+                                                              : const Color(
+                                                                  0xFF00AC3A)),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100)),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                          height: 10,
+                                                          width: 10,
+                                                          portfolio.data !=
+                                                                      null &&
+                                                                  portfolio
+                                                                          .data!
+                                                                          .portfolio!
+                                                                          .profit_percentage! <
+                                                                      10
+                                                              ? AppImages
+                                                                  .arrowDownLeft
+                                                              : AppImages
+                                                                  .arrowUpRight),
+                                                      addHorizontalSpace(5),
+                                                      Text(
+                                                        "${portfolio.data?.portfolio?.profit_percentage.toString() ?? ''}%",
+                                                        style: TextStyle(
+                                                            color: portfolio.data !=
+                                                                        null &&
+                                                                    portfolio
+                                                                            .data!
+                                                                            .portfolio!
+                                                                            .profit_percentage! <
+                                                                        10
+                                                                ? const Color(
+                                                                    0xFFE40C0C)
+                                                                : const Color(
+                                                                    0xFF00AC3A),
+                                                            fontSize: 10),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                          : errorWidget(errorMessage)),
                                   addVerticalSpace(10),
                                 ],
                               )),
@@ -141,13 +199,19 @@ class _HistoryCardState extends State<HistoryCard> {
                                         color: Color(0xFFE1E1E5), fontSize: 10),
                                   ),
                                   addVerticalSpace(10),
-                                  const Text(
-                                    "12",
-                                    style: TextStyle(
-                                        color: Color(0xFFE1E1E5),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                                  )
+                                  loaderWidget(
+                                      loading,
+                                      errorMessage.isEmpty
+                                          ? Text(
+                                              portfolio.data?.portfolio?.assets
+                                                      .toString() ??
+                                                  '',
+                                              style: const TextStyle(
+                                                  color: Color(0xFFE1E1E5),
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : errorWidget(errorMessage))
                                 ],
                               )),
                         ])),
@@ -158,10 +222,10 @@ class _HistoryCardState extends State<HistoryCard> {
                   children: [
                     Container(
                         padding: EdgeInsets.only(
-                          left: widget.screenSize.width / 50,
-                          right: widget.screenSize.width / 50,
-                          top: widget.screenSize.height / 30,
-                          bottom: widget.screenSize.height / 30,
+                          left: screenSize.width / 50,
+                          right: screenSize.width / 50,
+                          top: screenSize.height / 30,
+                          bottom: screenSize.height / 30,
                         ),
                         decoration: BoxDecoration(
                             color: const Color(0xFF161619),
@@ -177,7 +241,7 @@ class _HistoryCardState extends State<HistoryCard> {
                             children: [
                               Container(
                                   padding: EdgeInsets.only(
-                                    left: widget.screenSize.width / 20,
+                                    left: screenSize.width / 20,
                                   ),
                                   alignment: Alignment.centerLeft,
                                   decoration: const BoxDecoration(
@@ -197,18 +261,29 @@ class _HistoryCardState extends State<HistoryCard> {
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
-                                      const Text(
-                                        "\$616.81",
-                                        style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600),
-                                      )
+                                      loaderWidget(
+                                          loading,
+                                          errorMessage.isEmpty
+                                              ? Text(
+                                                  portfolio.data != null
+                                                      ? currencyFormatter(
+                                                          portfolio
+                                                              .data!
+                                                              .portfolio!
+                                                              .balance!)
+                                                      : '',
+                                                  style: const TextStyle(
+                                                      color: Color(0xFFE1E1E5),
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              : errorWidget(errorMessage))
                                     ],
                                   )),
                               Container(
                                   padding: EdgeInsets.only(
-                                    left: widget.screenSize.width / 20,
+                                    left: screenSize.width / 20,
                                   ),
                                   alignment: Alignment.centerLeft,
                                   decoration: const BoxDecoration(
@@ -228,51 +303,92 @@ class _HistoryCardState extends State<HistoryCard> {
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
-                                      Row(
-                                        children: [
-                                          const Text(
-                                            "\$86.03",
-                                            style: TextStyle(
-                                                color: Color(0xFFE1E1E5),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          addHorizontalSpace(10),
-                                          Container(
-                                            padding: const EdgeInsets.only(
-                                                top: 1,
-                                                bottom: 1,
-                                                left: 2,
-                                                right: 4),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: const Color(
-                                                        0xFF00AC3A)),
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                            child: Row(
-                                              children: [
-                                                Image.asset(
-                                                    height: 15,
-                                                    width: 15,
-                                                    AppImages.arrowUpRight),
-                                                addHorizontalSpace(5),
-                                                const Text(
-                                                  "31%",
-                                                  style: TextStyle(
-                                                      color: Color(0xFF00AC3A),
-                                                      fontSize: 10),
+                                      loaderWidget(
+                                          loading,
+                                          errorMessage.isEmpty
+                                              ? Row(
+                                                  children: [
+                                                    Text(
+                                                      portfolio.data != null
+                                                          ? currencyFormatter(
+                                                              portfolio
+                                                                  .data!
+                                                                  .portfolio!
+                                                                  .profit!)
+                                                          : '',
+                                                      style: const TextStyle(
+                                                          color:
+                                                              Color(0xFFE1E1E5),
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    addHorizontalSpace(10),
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 1,
+                                                              bottom: 1,
+                                                              left: 2,
+                                                              right: 4),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: portfolio.data !=
+                                                                          null &&
+                                                                      portfolio
+                                                                              .data!
+                                                                              .portfolio!
+                                                                              .profit_percentage! <
+                                                                          10
+                                                                  ? const Color(
+                                                                      0xFFE40C0C)
+                                                                  : const Color(
+                                                                      0xFF00AC3A)),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100)),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                              height: 15,
+                                                              width: 15,
+                                                              portfolio.data !=
+                                                                          null &&
+                                                                      portfolio
+                                                                              .data!
+                                                                              .portfolio!
+                                                                              .profit_percentage! <
+                                                                          10
+                                                                  ? AppImages
+                                                                      .arrowDownLeft
+                                                                  : AppImages
+                                                                      .arrowUpRight),
+                                                          addHorizontalSpace(5),
+                                                          Text(
+                                                            "${portfolio.data?.portfolio?.profit_percentage.toString() ?? ''}%",
+                                                            style: TextStyle(
+                                                                color: portfolio.data !=
+                                                                            null &&
+                                                                        portfolio.data!.portfolio!.profit_percentage! <
+                                                                            10
+                                                                    ? const Color(
+                                                                        0xFFE40C0C)
+                                                                    : const Color(
+                                                                        0xFF00AC3A),
+                                                                fontSize: 10),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
                                                 )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      )
+                                              : errorWidget(errorMessage))
                                     ],
                                   )),
                               Container(
                                   padding: EdgeInsets.only(
-                                    left: widget.screenSize.width / 20,
+                                    left: screenSize.width / 20,
                                   ),
                                   alignment: Alignment.centerLeft,
                                   child: Column(
@@ -287,13 +403,21 @@ class _HistoryCardState extends State<HistoryCard> {
                                             fontSize: 12),
                                       ),
                                       addVerticalSpace(10),
-                                      const Text(
-                                        "12",
-                                        style: TextStyle(
-                                            color: Color(0xFFE1E1E5),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600),
-                                      )
+                                      loaderWidget(
+                                          loading,
+                                          errorMessage.isEmpty
+                                              ? Text(
+                                                  portfolio.data?.portfolio
+                                                          ?.assets
+                                                          .toString() ??
+                                                      '',
+                                                  style: const TextStyle(
+                                                      color: Color(0xFFE1E1E5),
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              : errorWidget(errorMessage))
                                     ],
                                   )),
                             ])),
@@ -307,10 +431,10 @@ class _HistoryCardState extends State<HistoryCard> {
     return Container(
         width: double.infinity,
         padding: EdgeInsets.only(
-          left: widget.screenSize.width / 50,
-          right: widget.screenSize.width / 50,
-          top: widget.screenSize.height / 40,
-          bottom: widget.screenSize.height / 40,
+          left: screenSize.width / 50,
+          right: screenSize.width / 50,
+          top: screenSize.height / 40,
+          bottom: screenSize.height / 40,
         ),
         decoration: const BoxDecoration(
             border: Border(

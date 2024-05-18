@@ -7,4 +7,5 @@ class AppImages {
   static const String arrowUpRight = "${path}arrow-up-right.png";
   static const String calendar = "${path}calendar.png";
   static const String navArrowDown = "${path}nav-arrow-down.png";
+  static const String arrowDownLeft = "${path}arrow-down-left.png";
 }
