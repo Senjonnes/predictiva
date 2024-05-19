@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/pages/home/model/order_model.dart';
 import 'package:predictiva/utils/app_colors.dart';
+import 'package:predictiva/utils/global_function.dart';
 import 'package:predictiva/utils/helper_widgets.dart';
 
 class AppTableRow extends StatelessWidget {
-  const AppTableRow({super.key, required this.screenSize});
+  const AppTableRow(
+      {super.key,
+      required this.screenSize,
+      required this.currentPage,
+      required this.pageSize,
+      required this.order});
 
   final Size screenSize;
+  final int currentPage;
+  final int pageSize;
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +32,10 @@ class AppTableRow extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "MINAUSDT",
-                        style: TextStyle(color: AppColors.light, fontSize: 14),
+                      Text(
+                        order.symbol ?? "",
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 14),
                       ),
                       addVerticalSpace(8),
                       Row(
@@ -36,10 +47,10 @@ class AppTableRow extends StatelessWidget {
                                   border: Border.all(color: AppColors.danger),
                                   borderRadius: BorderRadius.circular(100),
                                   color: AppColors.sellBg),
-                              child: const Center(
+                              child: Center(
                                   child: Text(
-                                "Sell",
-                                style: TextStyle(
+                                capitalize(order.side!),
+                                style: const TextStyle(
                                     color: AppColors.danger, fontSize: 12),
                               )))
                         ],
@@ -49,14 +60,15 @@ class AppTableRow extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(
-                        "1.5636",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                      Text(
+                        order.price.toString(),
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       ),
                       addVerticalSpace(8),
-                      const Text(
-                        "19 Dec, 2023",
-                        style: TextStyle(
+                      Text(
+                        convertDateFromMiliseconds(order.creation_time!),
+                        style: const TextStyle(
                             color: AppColors.faintLight, fontSize: 12),
                       )
                     ],
@@ -75,23 +87,26 @@ class AppTableRow extends StatelessWidget {
                 childAspectRatio: 6,
                 crossAxisCount: 6,
                 children: [
-                  const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "MINAUSDT",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                        order.symbol ?? "",
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       )),
-                  const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "1.5636",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                        order.price.toString(),
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       )),
-                  const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "LMT",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                        order.type ?? "",
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       )),
                   Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -104,25 +119,27 @@ class AppTableRow extends StatelessWidget {
                                   border: Border.all(color: AppColors.danger),
                                   borderRadius: BorderRadius.circular(100),
                                   color: AppColors.sellBg),
-                              child: const Center(
+                              child: Center(
                                   child: Text(
-                                "Sell",
-                                style: TextStyle(
+                                capitalize(order.side!),
+                                style: const TextStyle(
                                     color: AppColors.danger, fontSize: 12),
                               )))
                         ],
                       )),
-                  const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "0",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                        order.quantity.toString(),
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       )),
-                  const Padding(
-                      padding: EdgeInsets.only(left: 25),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "19 Dec, 2023",
-                        style: TextStyle(color: AppColors.light, fontSize: 12),
+                        convertDateFromMiliseconds(order.creation_time!),
+                        style: const TextStyle(
+                            color: AppColors.light, fontSize: 12),
                       )),
                 ]),
           );

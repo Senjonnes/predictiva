@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
 
+import 'package:predictiva/public/model/app_response_status.dart';
+
 class PortfolioModel {
   AppResponseStatus? status;
   PortfolioData? data;
@@ -22,22 +24,6 @@ class PortfolioModel {
     final Map<String, dynamic> json = <String, dynamic>{};
     json['status'] = status;
     json['data'] = data;
-    return json;
-  }
-}
-
-class AppResponseStatus {
-  String? msg;
-
-  AppResponseStatus({this.msg});
-
-  AppResponseStatus.fromJson(Map<String, dynamic> json) {
-    msg = json['msg'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> json = <String, dynamic>{};
-    json['msg'] = msg;
     return json;
   }
 }

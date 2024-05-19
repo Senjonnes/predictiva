@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predictiva/config/config.dart';
 import 'package:predictiva/utils/app_colors.dart';
 
 Future<DateTime?> showRangeDatePicker(BuildContext context,
@@ -29,7 +30,7 @@ Future<DateTime?> showRangeDatePicker(BuildContext context,
   );
 }
 
-String currencyFormatter(double amount) {
+String currencyFormatter(double amount, {showSymbol = true}) {
   int integerPart = amount.truncate();
   int decimalPart = ((amount - integerPart) * 100).round();
 
@@ -40,5 +41,19 @@ String currencyFormatter(double amount) {
 
   String decimalPartFormatted = decimalPart.toString().padLeft(2, '0');
 
-  return '\$$integerPartFormatted.$decimalPartFormatted';
+  return showSymbol
+      ? '\$$integerPartFormatted.$decimalPartFormatted'
+      : '$integerPartFormatted.$decimalPartFormatted';
+}
+
+String capitalize(String text) {
+  return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
+}
+
+String convertDateFromMiliseconds(int timestamp) {
+  return getFormatedDate(DateTime.fromMillisecondsSinceEpoch(timestamp));
+}
+
+String getFormatedDate(DateTime date) {
+  return "${date.day}, ${months[date.month]}, ${date.year}";
 }
