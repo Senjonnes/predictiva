@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:predictiva/components/table/models/filter_model.dart';
 import 'package:predictiva/public/widgets/custom_button.dart';
 import 'package:predictiva/public/widgets/custom_dropdown_button_field.dart';
 import 'package:predictiva/public/widgets/custom_text_form_field.dart';
@@ -10,7 +11,13 @@ import 'package:predictiva/utils/helper_widgets.dart';
 
 class AppTableFilter extends StatefulWidget {
   final Size screenSize;
-  const AppTableFilter({super.key, required this.screenSize});
+  final List<String> symbols;
+  final Function(FilterModel) getFilter;
+  const AppTableFilter(
+      {super.key,
+      required this.screenSize,
+      required this.symbols,
+      required this.getFilter});
 
   @override
   State<AppTableFilter> createState() => _AppTableFilterState();
@@ -21,6 +28,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
   TextEditingController priceController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
+  FilterModel filter = FilterModel();
 
   @override
   void initState() {
@@ -107,7 +115,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
                       hintTextStyle:
                           const TextStyle(color: AppColors.hint, fontSize: 12),
                       isDense: true,
-                      items: const ['Symbol', 'Test', 'Items'],
+                      items: widget.symbols,
                       borderRadius: 5,
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 10),
@@ -115,6 +123,7 @@ class _AppTableFilterState extends State<AppTableFilter> {
                       onChanged: (value) => {
                         setState(() {
                           selectedSymbol = value;
+                          filter.symbol = value;
                         })
                       },
                     )),
@@ -130,12 +139,17 @@ class _AppTableFilterState extends State<AppTableFilter> {
                           const TextStyle(color: AppColors.hint, fontSize: 12),
                       prefixPadding: 0,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$'))
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,1000}$')),
                       ],
                       contentPaddingVertical: 12,
                       isDense: true,
                       borderRadius: 5,
-                      onChanged: (value) => {},
+                      onChanged: (value) => {
+                        setState(() {
+                          filter.price = double.parse(value);
+                        })
+                      },
                     ))
                   ],
                 ),
@@ -208,21 +222,50 @@ class _AppTableFilterState extends State<AppTableFilter> {
                             )))
                   ],
                 ),
-                SizedBox(
-                    width: widget.screenSize.width / 13,
-                    child: CustomButton(
-                      title: "Filter table",
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.button,
-                      verticalPadding: 0,
-                      horizontalPadding: 0,
-                      height: 35,
-                      borderRadius: 5,
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                    ))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    filter.symbol != null ||
+                            filter.price != null ||
+                            filter.startDate != null ||
+                            filter.endDate != null
+                        ? SizedBox(
+                            width: 100,
+                            child: CustomButton(
+                              title: "Clear filter",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.danger,
+                              verticalPadding: 0,
+                              horizontalPadding: 0,
+                              height: 35,
+                              borderRadius: 5,
+                              onTap: () {
+                                clearFilter();
+                                widget.getFilter(filter);
+                                Navigator.of(context).pop();
+                              },
+                            ))
+                        : const SizedBox(),
+                    addHorizontalSpace(10),
+                    SizedBox(
+                        width: 100,
+                        child: CustomButton(
+                          title: "Filter table",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.button,
+                          verticalPadding: 0,
+                          horizontalPadding: 0,
+                          height: 35,
+                          borderRadius: 5,
+                          onTap: () {
+                            widget.getFilter(filter);
+                            Navigator.of(context).pop();
+                          },
+                        ))
+                  ],
+                )
               ],
             ),
           ),
@@ -232,15 +275,29 @@ class _AppTableFilterState extends State<AppTableFilter> {
     );
   }
 
+  clearFilter() {
+    setState(() {
+      filter.symbol = null;
+      filter.price = null;
+      filter.startDate = null;
+      filter.endDate = null;
+      selectedSymbol = widget.symbols[0];
+      priceController.clear();
+      startDateController.clear();
+      endDateController.clear();
+    });
+  }
+
   selectStartDate(BuildContext context) async {
     DateTime? pickedDate;
     pickedDate = await showRangeDatePicker(context,
         firstDate: DateTime(DateTime.now().year - 100),
-        lastDate: pickedDate ?? DateTime(DateTime.now().year - 18, 12, 31),
-        initialDate: pickedDate ?? DateTime(DateTime.now().year - 18, 12, 31));
+        lastDate: pickedDate ?? DateTime.now(),
+        initialDate: pickedDate ?? DateTime.now());
     if (pickedDate != null) {
       setState(() {
         startDateController.text = pickedDate.toString().split(" ")[0];
+        filter.startDate = pickedDate?.millisecondsSinceEpoch;
       });
     }
   }
@@ -249,11 +306,12 @@ class _AppTableFilterState extends State<AppTableFilter> {
     DateTime? pickedDate;
     pickedDate = await showRangeDatePicker(context,
         firstDate: DateTime(DateTime.now().year - 100),
-        lastDate: pickedDate ?? DateTime(DateTime.now().year - 18, 12, 31),
-        initialDate: pickedDate ?? DateTime(DateTime.now().year - 18, 12, 31));
+        lastDate: pickedDate ?? DateTime.now(),
+        initialDate: pickedDate ?? DateTime.now());
     if (pickedDate != null) {
       setState(() {
         endDateController.text = pickedDate.toString().split(" ")[0];
+        filter.endDate = pickedDate?.millisecondsSinceEpoch;
       });
     }
   }
